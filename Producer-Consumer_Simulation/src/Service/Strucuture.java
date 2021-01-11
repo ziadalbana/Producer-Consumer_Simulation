@@ -3,14 +3,14 @@ package Service;
 
 import Machine.Consumer;
 import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Strucuture {
-    Hashtable<String,Queue> queues=new Hashtable<>();
+    Hashtable<String,BlockingQueue> queues=new Hashtable<>();
     Hashtable<String,Consumer> machines=new Hashtable<>(); 
     public void addQueue(String order){
-        queues.put(order, new LinkedList<>());
+        queues.put(order, new LinkedBlockingQueue());
     }
     public void fillqueueZero(String Colour){
         queues.get("Q0").add(Colour);

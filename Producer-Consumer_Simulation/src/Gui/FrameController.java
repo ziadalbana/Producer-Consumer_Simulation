@@ -44,7 +44,9 @@ public class FrameController extends Application implements Initializable {
     ToggleButton addMachine=new ToggleButton();
     @FXML 
     Button ConnectLine=new Button();
-    @FXML 
+    @FXML
+    Button start=new Button();
+    @FXML    
     ChoiceBox<String> colours=new ChoiceBox<>();
     @FXML 
     ChoiceBox<String> from=new ChoiceBox<>();
@@ -108,11 +110,14 @@ public class FrameController extends Application implements Initializable {
         }
         controller.setConnection(fromText, toText);        
     }
+    public void startAction(){
+        controller.startTreads();
+    }
     public void canvasPressed(MouseEvent e){
         if(addQueue.isSelected()){
             addQueue.setSelected(false);
-//            System.out.println(e.getX());
-//            System.out.println(e.getY());
+           //System.out.println(e.getX());
+           //System.out.println(e.getY());
             squares.add(new Rectangle());
             gc.setFill(Color.CADETBLUE);
             squares.get(squares.size()-1).setX(e.getX());
