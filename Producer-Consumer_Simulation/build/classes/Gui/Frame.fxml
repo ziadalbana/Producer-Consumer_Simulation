@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.canvas.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -11,7 +12,7 @@
    <children>
       <BorderPane prefHeight="829.0" prefWidth="1221.0">
          <center>
-            <Canvas fx:id="canvas" height="772.0" onMousePressed="#canvasPressed" width="710.0" BorderPane.alignment="CENTER" />
+            <Canvas fx:id="canvas" height="812.0" onMousePressed="#canvasPressed" width="734.0" BorderPane.alignment="CENTER" />
          </center>
          <right>
             <VBox alignment="TOP_CENTER" prefHeight="829.0" prefWidth="454.0" spacing="35.0" BorderPane.alignment="CENTER">
@@ -21,7 +22,7 @@
                      <children>
                         <Label prefHeight="21.0" prefWidth="141.0" text="Enter Queue order:" />
                         <TextField fx:id="queueNUM" prefHeight="21.0" prefWidth="127.0" promptText="Integers Only!" />
-                        <Button fx:id="addQueue" mnemonicParsing="false" onAction="#AddQueueAction" text="Add new Queue" />
+                        <ToggleButton fx:id="addQueue" mnemonicParsing="false" text="Add queue" />
                      </children>
                   </HBox>
                   <HBox prefHeight="72.0" prefWidth="393.0" spacing="30.0">
@@ -38,7 +39,7 @@
                         <TextField fx:id="machineName" />
                      </children>
                   </HBox>
-                  <Button fx:id="addMachine" mnemonicParsing="false" onAction="#AddMachine" text="Add Machine" />
+                  <ToggleButton fx:id="addMachine" mnemonicParsing="false" text="Add machine" />
                   <Label text="Connections Options" />
                   <HBox prefHeight="30.0" prefWidth="510.0" spacing="30.0">
                      <children>
@@ -48,11 +49,12 @@
                      </children>
                   </HBox>
                   <Button fx:id="ConnectLine" mnemonicParsing="false" onAction="#AddLineAction" text="Add line" />
-                  <ToggleButton fx:id="btn" mnemonicParsing="false" text="ToggleButton" />
-                  <Button fx:id="bs" mnemonicParsing="false" onAction="#btnsPressed" text="Button" />
                </children>
             </VBox>
          </right>
+         <padding>
+            <Insets bottom="10.0" right="10.0" top="10.0" />
+         </padding>
       </BorderPane>
    </children>
 </AnchorPane>
