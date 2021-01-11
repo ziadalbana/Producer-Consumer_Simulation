@@ -64,6 +64,7 @@ public class test extends Application{
         gc.setLineWidth(1);
         canvas.setOnMousePressed(this::canvasPressed);
         btns.setOnMousePressed(this::btnsPressed);
+        
         BorderPane pane = new BorderPane();
         pane.setLeft(btns);
         pane.setCenter(canvas);
@@ -78,6 +79,7 @@ public class test extends Application{
     
     public void canvasPressed(MouseEvent e){
         if(rectbtn.isSelected()){
+            rectbtn.setSelected(false);
             System.out.println(e.getX());
             System.out.println(e.getY());
             squares.add(new Rectangle());

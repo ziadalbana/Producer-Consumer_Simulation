@@ -58,14 +58,14 @@ public class FrameController extends Application implements Initializable {
     
     @FXML
     Canvas canvas = new Canvas();
-    
     GraphicsContext gc = canvas.getGraphicsContext2D();
     List<Circle> circles = new ArrayList<>();
     List<Rectangle> squares = new ArrayList<>();
     
     @FXML
     ToggleButton btn = new ToggleButton("Draw");
-    
+    @FXML 
+    Button bs=new Button();
     
     @FXML 
     TextField machineName=new TextField(); 
@@ -111,22 +111,34 @@ public class FrameController extends Application implements Initializable {
         }
         data.setConnection(fromText, toText);        
     }
-    
     public void canvasPressed(MouseEvent e){
         if(btn.isSelected()){
+            btn.setSelected(false);
             System.out.println(e.getX());
             System.out.println(e.getY());
             squares.add(new Rectangle());
             gc.setFill(Color.BLACK);
             squares.get(squares.size()-1).setX(e.getX());
             squares.get(squares.size()-1).setY(e.getY());
-            squares.get(squares.size()-1).setWidth(15);
-            squares.get(squares.size()-1).setHeight(15);
+            squares.get(squares.size()-1).setWidth(100);
+            squares.get(squares.size()-1).setHeight(100);
             gc.fillRect(squares.get(squares.size()-1).getX(), squares.get(squares.size()-1).getY(),
                     squares.get(squares.size()-1).getWidth(), squares.get(squares.size()-1).getHeight());
             gc.strokeRect(squares.get(squares.size()-1).getX(), squares.get(squares.size()-1).getY(),
                     squares.get(squares.size()-1).getWidth(), squares.get(squares.size()-1).getHeight());
         }else{System.out.println("no");}
     }
+    public void btnsPressed(MouseEvent e){
+         gc.clearRect(0, 0, 1080, 790);
+            
+        for(Rectangle r:squares){
+            gc.setLineWidth(r.getStrokeWidth());
+            gc.setStroke(r.getStroke());
+            gc.setFill(Color.BLUE);
+            gc.fillRect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+            gc.strokeRect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
+        }
+    }
+    
     
 }

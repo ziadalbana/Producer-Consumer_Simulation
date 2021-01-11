@@ -9,7 +9,7 @@ public class App {
 
    
     public static void main(String[] args) {
-      launch(test.class,args);
+      launch(FrameController.class,args);
     }
     
 }

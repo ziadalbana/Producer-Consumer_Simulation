@@ -11,7 +11,7 @@
    <children>
       <BorderPane prefHeight="829.0" prefWidth="1221.0">
          <center>
-            <Canvas fx:id="board" height="772.0" width="710.0" BorderPane.alignment="CENTER" />
+            <Canvas fx:id="canvas" height="772.0" onMousePressed="#canvasPressed" width="710.0" BorderPane.alignment="CENTER" />
          </center>
          <right>
             <VBox alignment="TOP_CENTER" prefHeight="829.0" prefWidth="454.0" spacing="35.0" BorderPane.alignment="CENTER">
@@ -48,6 +48,8 @@
                      </children>
                   </HBox>
                   <Button fx:id="ConnectLine" mnemonicParsing="false" onAction="#AddLineAction" text="Add line" />
+                  <ToggleButton fx:id="btn" mnemonicParsing="false" text="ToggleButton" />
+                  <Button fx:id="bs" mnemonicParsing="false" onAction="#btnsPressed" text="Button" />
                </children>
             </VBox>
          </right>
