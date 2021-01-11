@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1116.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.FrameController">
    <children>
-      <Canvas fx:id="board" height="772.0" layoutY="7.0" width="692.0" />
+      <Canvas fx:id="canvas" height="772.0" layoutY="7.0" onMouseClicked="#canvasPressed" width="692.0" />
       <VBox alignment="TOP_CENTER" layoutX="697.0" layoutY="7.0" prefHeight="788.0" prefWidth="486.0" spacing="35.0">
          <children>
             <Label text="Queue options" />
@@ -44,6 +44,7 @@
                </children>
             </HBox>
             <Button fx:id="ConnectLine" mnemonicParsing="false" onAction="#AddLineAction" text="Add line" />
+            <ToggleButton fx:id="btn" mnemonicParsing="false" text="ToggleButton" />
          </children>
       </VBox>
    </children>
