@@ -6,8 +6,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.Random;
 
 public class Consumer implements Runnable {
-	ArrayList<Integer> connectedBefore;
-        int connectedAfter;
+	ArrayList<String> connectedBefore;
+        String connectedAfter;
 	private BlockingQueue sharedQueue1;
 	private BlockingQueue sharedQueue2;
 	private int SleepingTime ;
@@ -18,19 +18,19 @@ public class Consumer implements Runnable {
         this.connectedBefore=new ArrayList<>();
     }
 
-    public ArrayList<Integer> getConnectedBefore() {
+    public ArrayList<String> getConnectedBefore() {
         return connectedBefore;
     }
 
-    public void setConnectedBefore(int connectedBefore) {
+    public void setConnectedBefore(String connectedBefore) {
         this.connectedBefore.add(connectedBefore);
     }
 
-    public int getConnectedAfter() {
+    public String getConnectedAfter() {
         return connectedAfter;
     }
 
-    public void setConnectedAfter(int connectedAfter) {
+    public void setConnectedAfter(String connectedAfter) {
         this.connectedAfter = connectedAfter;
     }
 

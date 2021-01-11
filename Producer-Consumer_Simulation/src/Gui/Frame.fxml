@@ -22,7 +22,7 @@
                      <children>
                         <Label prefHeight="21.0" prefWidth="141.0" text="Enter Queue order:" />
                         <TextField fx:id="queueNUM" prefHeight="21.0" prefWidth="127.0" promptText="Integers Only!" />
-                        <ToggleButton fx:id="addQueue" mnemonicParsing="false" text="Add queue" />
+                        <ToggleButton fx:id="addQueue" mnemonicParsing="false" onAction="#AddQueueAction" text="Add queue" />
                      </children>
                   </HBox>
                   <HBox prefHeight="72.0" prefWidth="393.0" spacing="30.0">
@@ -39,7 +39,7 @@
                         <TextField fx:id="machineName" />
                      </children>
                   </HBox>
-                  <ToggleButton fx:id="addMachine" mnemonicParsing="false" text="Add machine" />
+                  <ToggleButton fx:id="addMachine" mnemonicParsing="false" onAction="#AddMachine" text="Add machine" />
                   <Label text="Connections Options" />
                   <HBox prefHeight="30.0" prefWidth="510.0" spacing="30.0">
                      <children>

@@ -54,7 +54,7 @@ public class FrameController extends Application implements Initializable {
     TextField queueNUM=new TextField();
     @FXML 
     TextField machineName=new TextField(); 
-    Strucuture data=new Strucuture();
+    Controller controller=new Controller();
     
     //shapes
     List<Circle> circles = new ArrayList<>();
@@ -82,18 +82,18 @@ public class FrameController extends Application implements Initializable {
     }
     
     public void AddQueueAction(){
-        int order=Integer.parseInt(queueNUM.getText());
-        if(order==0){
-            from.getItems().add("Q0");
+        String order="Q"+queueNUM.getText();
+        if("Q0".equals(order)){
+            from.getItems().add(order);
         }else{
-            from.getItems().add("Q"+order);
-            to.getItems().add("Q"+order);
+            from.getItems().add(order);
+            to.getItems().add(order);
         }
-        data.addQueue(order);
+        controller.addQueue(order);
     }
     public void AddQueueColour(){
         String colour=colours.getValue();
-        data.fillqueueZero(colour);
+        controller.fillqueueZero(colour);
     }
     public void AddMachine(){
         String machine=machineName.getText();
@@ -106,7 +106,7 @@ public class FrameController extends Application implements Initializable {
         if(fromText.toLowerCase().charAt(0)=='m'&&toText.toLowerCase().charAt(0)=='q'){
         from.getItems().remove(fromText);
         }
-        data.setConnection(fromText, toText);        
+        controller.setConnection(fromText, toText);        
     }
     public void canvasPressed(MouseEvent e){
         if(addQueue.isSelected()){
