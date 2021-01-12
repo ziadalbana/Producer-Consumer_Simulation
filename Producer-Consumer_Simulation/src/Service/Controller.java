@@ -60,6 +60,9 @@ public class Controller {
             data.machines.get(key).setSharedQueue2(afterQueue);
         });
     }
+    public Hashtable<String,String> getColors(){
+        return machineColors;
+    }
     
     public Pair<Double,Double> getPoint(String name){
         double x=0,y=0;
@@ -79,9 +82,9 @@ public class Controller {
         circles.put(name, c);
         machineColors.put(name, Color.WHITE.toString());
     }
-    public void reDraw(){
+    public synchronized void reDraw(){
         lines.forEach(p-> FrameController.drawLine(p));
-        //FrameController.reDraw(rectangles.values().iterator(), circles.values().iterator(),machineColors.values().iterator());
+        FrameController.reDraw(rectangles.values().iterator(), circles.values().iterator(),machineColors.values().iterator());
     }
     
 }
