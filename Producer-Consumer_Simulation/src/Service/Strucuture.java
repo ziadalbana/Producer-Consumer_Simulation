@@ -10,7 +10,7 @@ public class Strucuture {
     Hashtable<String,BlockingQueue> queues=new Hashtable<>();
     Hashtable<String,Consumer> machines=new Hashtable<>(); 
     public void addQueue(String order){
-        queues.put(order, new LinkedBlockingQueue());
+        queues.put(order, new LinkedBlockingQueue<>());
     }
     public void fillqueueZero(String Colour){
         queues.get("Q0").add(Colour);

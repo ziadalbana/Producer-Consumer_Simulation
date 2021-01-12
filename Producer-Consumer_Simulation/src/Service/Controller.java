@@ -46,7 +46,7 @@ public class Controller {
                 BlockingQueue queue = (BlockingQueue) data.queues.get(data.machines.get(key).getConnectedBefore().get(j));
                 beforeQueues.add(queue);
             }
-            BlockingQueue afterQueue = (BlockingQueue) data.queues.get(data.machines.get(key).getConnectedBefore());
+            BlockingQueue afterQueue = (BlockingQueue) data.queues.get(data.machines.get(key).getConnectedAfter());
             data.machines.get(key).setSharedQueue1(beforeQueues);
             data.machines.get(key).setSharedQueue2(afterQueue);
         });
