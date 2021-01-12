@@ -55,6 +55,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
+                  <Button fx:id="s" mnemonicParsing="false" onAction="#se" text="Button" />
                </children>
             </VBox>
          </right>

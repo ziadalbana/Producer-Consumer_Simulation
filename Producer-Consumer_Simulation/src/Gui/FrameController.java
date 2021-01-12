@@ -3,13 +3,14 @@ package Gui;
 import Service.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,7 +28,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-
+import javafx.util.Pair;
 
 public class FrameController extends Application {
 
@@ -57,11 +58,10 @@ public class FrameController extends Application {
     TextField queueNUM=new TextField();
     @FXML 
     TextField machineName=new TextField(); 
-    Controller controller=new Controller();
+    static Controller controller=new Controller();
     
-    //shapes
-    List<Circle> circles = new ArrayList<>();
-    List<Rectangle> squares = new ArrayList<>();
+    @FXML
+    Button s=new Button();
     
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -103,8 +103,9 @@ public class FrameController extends Application {
         String fromText=from.getValue();
         String toText=to.getValue();
         if(fromText.toLowerCase().charAt(0)=='m'&&toText.toLowerCase().charAt(0)=='q'){
-        from.getItems().remove(fromText);
+            from.getItems().remove(fromText);
         }
+        drawLine(new Pair(fromText,"M"+toText));
         controller.setConnection(fromText, toText);        
     }
     public void startAction(){
@@ -118,15 +119,11 @@ public class FrameController extends Application {
                 System.out.println("error");
                 return;
             }
-            Rectangle rec = new Rectangle();
+            Rectangle rec = shapes.getRectangle(e.getX(), e.getY());
             gc.setFill(Color.CADETBLUE);
-            rec.setX(e.getX());
-            rec.setY(e.getY());
-            rec.setWidth(75);
-            rec.setHeight(30);
-            gc.fillRect(rec.getX(), rec.getY(), rec.getWidth(), rec.getHeight());
-            gc.strokeRect(rec.getX(), rec.getY(), rec.getWidth(), rec.getHeight());
-            squares.add(rec);
+            gc.fillRect(e.getX(), e.getY(), rec.getWidth(), rec.getHeight());
+            gc.strokeRect(e.getX(), e.getY(), rec.getWidth(), rec.getHeight());
+            controller.addRectangle("Q"+queueNUM.getText(), rec);
             
         }else if(addMachine.isSelected()){
             addMachine.setSelected(false);
@@ -134,27 +131,42 @@ public class FrameController extends Application {
                 System.out.println("error");
                 return;
             }
-            Circle c = new Circle();
+            Circle c = shapes.getCircle(e.getX(), e.getY());
             gc.setFill(Color.WHITE);
-            c.setCenterX(e.getX()-25);
-            c.setCenterY(e.getY()-25);
-            c.setRadius(50);
             gc.fillOval(c.getCenterX(), c.getCenterY(), c.getRadius(), c.getRadius());
             gc.strokeOval(c.getCenterX(), c.getCenterY(),c.getRadius(), c.getRadius());
-            circles.add(c);
+            controller.addCircle("M"+machineName.getText(), c);
         }else{
             System.out.println("no");
         }
     }
     
-//    public void reDraw(){
-//         this.gc.clearRect(0, 0, 1080, 790);   
-//        for(Rectangle r:squares){
-//            this.gc.setLineWidth(r.getStrokeWidth());
-//            this.gc.setStroke(r.getStroke());
-//            this.gc.setFill(Color);
-//            this.gc.fillRect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
-//            this.gc.strokeRect(r.getX(), r.getY(), r.getWidth(), r.getHeight());
-//        }
-//    }   
+    public static void drawLine(Pair<String,String> line){
+        Pair<Double,Double> start = controller.getPoint(line.getKey());
+        Pair<Double,Double> end = controller.getPoint(line.getValue());
+        gc.strokeLine(start.getKey(), start.getValue(), end.getKey(), end.getValue());
+    }
+    
+    public static void reDraw(Iterator<Rectangle> rectangles,Iterator<Circle> circles,Iterator<String> colors){
+        //gc.clearRect(0, 0, 1080, 790);   
+        rectangles.forEachRemaining(rec ->{
+            gc.setLineWidth(rec.getStrokeWidth());
+            gc.setStroke(rec.getStroke());
+            gc.setFill(Color.CADETBLUE);
+            gc.fillRect(rec.getX(), rec.getY(), rec.getWidth(), rec.getHeight());
+            gc.strokeRect(rec.getX(), rec.getY(), rec.getWidth(), rec.getHeight());
+        });
+        while(circles.hasNext()&&colors.hasNext()){
+            Circle c = circles.next();
+            gc.setLineWidth(c.getStrokeWidth());
+            gc.setStroke(c.getStroke());
+            gc.setFill(Paint.valueOf(colors.next()));
+            gc.fillOval(c.getCenterX(), c.getCenterY(), c.getRadius(), c.getRadius());
+            gc.strokeOval(c.getCenterX(), c.getCenterY(),c.getRadius(), c.getRadius());
+        }
+    } 
+    public void se(){
+        gc.clearRect(0, 0, 1080, 790);
+        controller.reDraw();
+    }
 }
