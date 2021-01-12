@@ -5,14 +5,20 @@ import Machine.Consumer;
 import java.util.Hashtable;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import javafx.scene.paint.Color;
 
 public class Strucuture {
-    Hashtable<String,BlockingQueue> queues=new Hashtable<>();
-    Hashtable<String,Consumer> machines=new Hashtable<>(); 
+    Hashtable<String,BlockingQueue<Color>> queues;
+    Hashtable<String,Consumer> machines;
+
+    public Strucuture() {
+        this.queues = new Hashtable<>();
+        this.machines=new Hashtable<>();
+    }
     public void addQueue(String order){
         queues.put(order, new LinkedBlockingQueue<>());
     }
-    public void fillqueueZero(String Colour){
+    public void fillqueueZero(Color Colour){
         queues.get("Q0").add(Colour);
     }
     public void setConnection(String from,String to){

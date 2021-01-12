@@ -29,7 +29,7 @@
                   <HBox prefHeight="72.0" prefWidth="393.0" spacing="30.0">
                      <children>
                         <Label text="Enter colours:" />
-                        <ChoiceBox fx:id="colours" prefWidth="150.0" />
+                        <ColorPicker fx:id="colours" />
                         <Button fx:id="addTOQueue" mnemonicParsing="false" onAction="#AddQueueColour" text="Add to Queue" />
                      </children>
                   </HBox>

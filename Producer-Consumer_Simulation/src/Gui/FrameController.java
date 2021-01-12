@@ -17,6 +17,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
@@ -28,7 +29,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 
-public class FrameController extends Application implements Initializable {
+public class FrameController extends Application {
 
     /**
      * Initializes the controller class.
@@ -47,7 +48,7 @@ public class FrameController extends Application implements Initializable {
     @FXML
     Button start=new Button();
     @FXML    
-    ChoiceBox<String> colours=new ChoiceBox<>();
+    ColorPicker colours=new ColorPicker();
     @FXML 
     ChoiceBox<String> from=new ChoiceBox<>();
     @FXML 
@@ -77,11 +78,7 @@ public class FrameController extends Application implements Initializable {
         primaryStage.show(); 
     }
     
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        colours.getItems().addAll("red","Yellow","Blue","Orange");
-        colours.getSelectionModel().select(0);
-    }
+   
     
     public void AddQueueAction(){
         String order="Q"+queueNUM.getText();
@@ -94,7 +91,7 @@ public class FrameController extends Application implements Initializable {
         controller.addQueue(order);
     }
     public void AddQueueColour(){
-        String colour=colours.getValue();
+        Color colour=colours.getValue();
         controller.fillqueueZero(colour);
     }
     public void AddMachine(){

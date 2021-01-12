@@ -10,18 +10,15 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
+import javafx.scene.paint.Color;
 
-/**
- *
- * @author Alex
- */
 public class Controller {
     Strucuture data=new Strucuture();
     ArrayList<Thread> activeThreads=new ArrayList<>();
     public void addQueue(String order){
         data.addQueue(order);
     }
-    public void fillqueueZero(String colour){
+    public void fillqueueZero(Color colour){
         data.fillqueueZero(colour);
     }
     public void setConnection(String from,String to){
