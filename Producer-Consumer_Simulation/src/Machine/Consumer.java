@@ -9,15 +9,20 @@ import java.util.Random;
 public class Consumer implements Runnable {
 	ArrayList<String> connectedBefore;
         String connectedAfter;
+        private String name; 
 	private ArrayList<BlockingQueue> sharedQueue1;
 	private BlockingQueue sharedQueue2;
 	private int SleepingTime ;
 	Random rand = new Random(); 
         Controller control = new Controller();
 
-    public Consumer () {
+    public Consumer (String name) {
         this.SleepingTime = rand.nextInt(10);
         this.connectedBefore=new ArrayList<>();
+    }
+
+    public String getName() {
+        return name;
     }
 
     public ArrayList<String> getConnectedBefore() {

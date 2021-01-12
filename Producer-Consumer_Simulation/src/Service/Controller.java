@@ -33,7 +33,7 @@ public class Controller {
         data.fillqueueZero(colour);
     }
     public void setConnection(String from,String to){
-        lines.add(new Pair(from,"M"+to));
+        lines.add(new Pair(from,to));
         data.setConnection(from, to);
     }
     public void startTreads(){
@@ -45,6 +45,14 @@ public class Controller {
         });
         for(int i=0;i<size;i++){
             activeThreads.get(i).start();
+        }
+        size=data.queues.get("Q0").size();
+        while(true){
+            if(data.queues.get("QF").size()==size){
+                for(int i=0;i<size;i++){
+                   activeThreads.get(i).stop();
+                }
+            }
         }
     }
     private void setMachinesQueues(){

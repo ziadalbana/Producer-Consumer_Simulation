@@ -95,17 +95,17 @@ public class FrameController extends Application {
         controller.fillqueueZero(colour);
     }
     public void AddMachine(){
-        String machine=machineName.getText();
+        String machine="M"+machineName.getText();
         from.getItems().add(machine);
         to.getItems().add(machine);
     }
     public void AddLineAction(){
         String fromText=from.getValue();
         String toText=to.getValue();
-        if(fromText.toLowerCase().charAt(0)=='m'&&toText.toLowerCase().charAt(0)=='q'){
+        if(fromText.charAt(0)=='M'&&toText.charAt(0)=='Q'){
             from.getItems().remove(fromText);
         }
-        drawLine(new Pair(fromText,"M"+toText));
+        drawLine(new Pair(fromText,toText));
         controller.setConnection(fromText, toText);        
     }
     public void startAction(){
