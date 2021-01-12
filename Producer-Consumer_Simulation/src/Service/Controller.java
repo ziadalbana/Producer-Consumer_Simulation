@@ -13,6 +13,8 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -23,7 +25,7 @@ public class Controller {
     ArrayList<Thread> activeThreads=new ArrayList<>();
     private Hashtable<String,Rectangle> rectangles =new Hashtable<>();
     private Hashtable<String,Circle> circles =new Hashtable<>();
-    private Hashtable<String,String> machineColors =new Hashtable<>();
+    private Hashtable<String,String> machineColors = new Hashtable<>();
     List<Pair<String,String>> lines = new ArrayList<>();
     
     public void addQueue(String order){
@@ -34,11 +36,11 @@ public class Controller {
     }
     public void setConnection(String from,String to){
         lines.add(new Pair(from,to));
-        data.setConnection(from, to);
+        data.setConnection(from, to,this);
     }
     public void startTreads(){
         int size=data.machines.size();
-         Set<String> keys=data.machines.keySet();
+        Set<String> keys=data.machines.keySet();
         setMachinesQueues();
         keys.forEach((key) -> {
             activeThreads.add(new Thread(data.machines.get(key)));
@@ -48,10 +50,16 @@ public class Controller {
         }
         size=data.queues.get("Q0").size();
         while(true){
-            if(data.queues.get("QF").size()==size){
+            if(data.queues.get("QF").size() == size){
                 for(int i=0;i<size;i++){
                    activeThreads.get(i).stop();
                 }
+                break;
+            }
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

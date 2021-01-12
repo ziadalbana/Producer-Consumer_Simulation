@@ -1,6 +1,7 @@
 package Machine;
 
 import Service.Controller;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -14,11 +15,13 @@ public class Consumer implements Runnable {
 	private BlockingQueue sharedQueue2;
 	private int SleepingTime ;
 	Random rand = new Random(); 
-        Controller control = new Controller();
+        Controller control ;
 
-    public Consumer (String name) {
+    public Consumer (String name,Controller control) {
         this.SleepingTime = rand.nextInt(10);
         this.connectedBefore=new ArrayList<>();
+        this.name = name;
+        this.control = control;
     }
 
     public String getName() {
@@ -69,8 +72,12 @@ public class Consumer implements Runnable {
                 {
                     BlockingQueue  n = sharedQueue1.get(j) ;
                     String i = (String) n.take() ;
+                    control.getColors().put(name, i);
+                    control.reDraw();
                     System.out.println("Consumed: "+ i);
                     Thread.sleep(this.SleepingTime*1000);
+                    control.getColors().put(name, Color.WHITE.toString());
+                    control.reDraw();
                     System.out.println("Produced: " + i);
                     sharedQueue2.put(i);
                     if (j == this.sharedQueue1.size()) j=0 ;
