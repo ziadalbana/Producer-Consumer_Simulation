@@ -22,7 +22,7 @@ public class Strucuture {
         queues.get("Q0").add(Colour);
     }
     public void setConnection(String from,String to, Controller control){
-        if(from.charAt(0)=='Q'&&to.toLowerCase().charAt(0)=='M'){
+        if(from.charAt(0)=='Q'&&to.charAt(0)=='M'){
         try{
              machines.get(to).setConnectedBefore(from); 
           }catch(Exception e){
@@ -30,7 +30,7 @@ public class Strucuture {
               machines.get(to).setConnectedBefore(from);
           }
               
-        }else if(from.charAt(0)=='M'&&to.toLowerCase().charAt(0)=='Q'){
+        }else if(from.charAt(0)=='M'&&to.charAt(0)=='Q'){
             machines.get(from).setConnectedAfter(to);
         }
     }
