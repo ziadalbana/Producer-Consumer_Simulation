@@ -25,7 +25,7 @@ public class Controller {
     ArrayList<Thread> activeThreads=new ArrayList<>();
     private Hashtable<String,Rectangle> rectangles =new Hashtable<>();
     private Hashtable<String,Circle> circles =new Hashtable<>();
-    private Hashtable<String,String> machineColors = new Hashtable<>();
+    private Hashtable<String,Color> machineColors = new Hashtable<>();
     List<Pair<String,String>> lines = new ArrayList<>();
     
     public void addQueue(String order){
@@ -49,24 +49,24 @@ public class Controller {
             activeThreads.get(i).start();
         }
         size=data.queues.get("Q0").size();
-        while(true){
-            if(data.queues.get("QF").size() == size){
-                for(int i=0;i<size;i++){
-                   activeThreads.get(i).stop();
-                }
-                break;
-            }
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+//        while(true){
+//            if(data.queues.get("QF").size() == size){
+//                for(int i=0;i<size;i++){
+//                   activeThreads.get(i).stop();
+//                }
+//                break;
+//            }
+//            try {
+//                Thread.sleep(10000);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
     }
     private void setMachinesQueues(){
         Set<String> keys=data.machines.keySet();
         keys.forEach((key) -> {
-            ArrayList<BlockingQueue> beforeQueues=new ArrayList<>();
+            ArrayList<BlockingQueue<Color>> beforeQueues=new ArrayList<>();
             for (int j = 0; j < data.machines.get(key).getConnectedBefore().size(); j++) {
                 BlockingQueue queue = (BlockingQueue) data.queues.get(data.machines.get(key).getConnectedBefore().get(j));
                 beforeQueues.add(queue);
@@ -76,7 +76,7 @@ public class Controller {
             data.machines.get(key).setSharedQueue2(afterQueue);
         });
     }
-    public Hashtable<String,String> getColors(){
+    public synchronized Hashtable<String,Color> getColors(){
         return machineColors;
     }
     
@@ -96,11 +96,11 @@ public class Controller {
     }
     public void addCircle(String name,Circle c){
         circles.put(name, c);
-        machineColors.put(name, Color.WHITE.toString());
+        machineColors.put(name, Color.WHITE);
     }
     public synchronized void reDraw(){
+        FrameController.reDraw(rectangles.values().iterator(), circles,machineColors,circles.keySet());
         lines.forEach(p-> FrameController.drawLine(p));
-        FrameController.reDraw(rectangles.values().iterator(), circles.values().iterator(),machineColors.values().iterator());
     }
     
 }

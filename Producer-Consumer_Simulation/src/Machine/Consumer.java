@@ -1,7 +1,7 @@
 package Machine;
 
 import Service.Controller;
-import java.awt.Color;
+import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -11,7 +11,7 @@ public class Consumer implements Runnable {
 	ArrayList<String> connectedBefore;
         String connectedAfter;
         private String name; 
-	private ArrayList<BlockingQueue> sharedQueue1;
+	private ArrayList<BlockingQueue<Color>> sharedQueue1;
 	private BlockingQueue sharedQueue2;
 	private int SleepingTime ;
 	Random rand = new Random(); 
@@ -44,11 +44,11 @@ public class Consumer implements Runnable {
         this.connectedAfter = connectedAfter;
     }
 
-    public ArrayList<BlockingQueue> getSharedQueue1() {
+    public ArrayList<BlockingQueue<Color>> getSharedQueue1() {
         return sharedQueue1;
     }
 
-    public void setSharedQueue1(ArrayList<BlockingQueue> sharedQueue1) {
+    public void setSharedQueue1(ArrayList<BlockingQueue<Color>> sharedQueue1) {
         this.sharedQueue1 = sharedQueue1;
     }
 
@@ -70,13 +70,13 @@ public class Consumer implements Runnable {
             try {
                 for(int j=0 ;j<this.sharedQueue1.size();j++)
                 {
-                    BlockingQueue  n = sharedQueue1.get(j) ;
-                    String i = (String) n.take() ;
+                    BlockingQueue<Color>  n = sharedQueue1.get(j) ;
+                    Color i = n.take() ;
                     control.getColors().put(name, i);
                     control.reDraw();
                     System.out.println("Consumed: "+ i);
                     Thread.sleep(this.SleepingTime*1000);
-                    control.getColors().put(name, Color.WHITE.toString());
+                    control.getColors().put(name, Color.WHITE);
                     control.reDraw();
                     System.out.println("Produced: " + i);
                     sharedQueue2.put(i);

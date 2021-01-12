@@ -4,9 +4,11 @@ import Service.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -147,8 +149,9 @@ public class FrameController extends Application {
         gc.strokeLine(start.getKey(), start.getValue(), end.getKey(), end.getValue());
     }
     
-    public static void reDraw(Iterator<Rectangle> rectangles,Iterator<Circle> circles,Iterator<String> colors){
-        //gc.clearRect(0, 0, 1080, 790);   
+    public static void reDraw(Iterator<Rectangle> rectangles,Hashtable<String,Circle> circles,
+                              Hashtable<String,Color> colors ,Set<String> keys){
+        gc.clearRect(0, 0, 1080, 790);   
         rectangles.forEachRemaining(rec ->{
             gc.setLineWidth(rec.getStrokeWidth());
             gc.setStroke(rec.getStroke());
@@ -156,17 +159,13 @@ public class FrameController extends Application {
             gc.fillRect(rec.getX(), rec.getY(), rec.getWidth(), rec.getHeight());
             gc.strokeRect(rec.getX(), rec.getY(), rec.getWidth(), rec.getHeight());
         });
-        while(circles.hasNext()&&colors.hasNext()){
-            Circle c = circles.next();
+        keys.forEach(key ->{
+            Circle c = circles.get(key);
             gc.setLineWidth(c.getStrokeWidth());
             gc.setStroke(c.getStroke());
-            gc.setFill(Paint.valueOf(colors.next()));
+            gc.setFill(colors.get(key));
             gc.fillOval(c.getCenterX(), c.getCenterY(), c.getRadius(), c.getRadius());
             gc.strokeOval(c.getCenterX(), c.getCenterY(),c.getRadius(), c.getRadius());
-        }
+        });
     } 
-    public void se(){
-        gc.clearRect(0, 0, 1080, 790);
-        controller.reDraw();
-    }
 }
