@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.canvas.*?>
 <?import java.lang.*?>
@@ -49,6 +50,11 @@
                      </children>
                   </HBox>
                   <Button fx:id="ConnectLine" mnemonicParsing="false" onAction="#AddLineAction" text="Add line" />
+                  <Button fx:id="start" mnemonicParsing="false" onAction="#startAction" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: black;" text="Start " textAlignment="CENTER" textFill="#e45353">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                </children>
             </VBox>
          </right>
