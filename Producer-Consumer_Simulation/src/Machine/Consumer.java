@@ -1,5 +1,6 @@
 package Machine;
 
+import Service.Controller;
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -12,6 +13,7 @@ public class Consumer implements Runnable {
 	private BlockingQueue sharedQueue2;
 	private int SleepingTime ;
 	Random rand = new Random(); 
+        Controller control = new Controller();
 
     public Consumer () {
         this.SleepingTime = rand.nextInt(10);
