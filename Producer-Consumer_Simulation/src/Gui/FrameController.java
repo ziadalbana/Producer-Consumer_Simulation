@@ -113,33 +113,38 @@ public class FrameController extends Application implements Initializable {
     public void startAction(){
         controller.startTreads();
     }
+    
     public void canvasPressed(MouseEvent e){
         if(addQueue.isSelected()){
             addQueue.setSelected(false);
-           //System.out.println(e.getX());
-           //System.out.println(e.getY());
-            squares.add(new Rectangle());
+            if(queueNUM.getText().isEmpty()){
+                System.out.println("error");
+                return;
+            }
+            Rectangle rec = new Rectangle();
             gc.setFill(Color.CADETBLUE);
-            squares.get(squares.size()-1).setX(e.getX());
-            squares.get(squares.size()-1).setY(e.getY());
-            squares.get(squares.size()-1).setWidth(100);
-            squares.get(squares.size()-1).setHeight(100);
-            gc.fillRect(squares.get(squares.size()-1).getX(), squares.get(squares.size()-1).getY(),
-                    squares.get(squares.size()-1).getWidth(), squares.get(squares.size()-1).getHeight());
-            gc.strokeRect(squares.get(squares.size()-1).getX(), squares.get(squares.size()-1).getY(),
-                    squares.get(squares.size()-1).getWidth(), squares.get(squares.size()-1).getHeight());
+            rec.setX(e.getX());
+            rec.setY(e.getY());
+            rec.setWidth(75);
+            rec.setHeight(30);
+            gc.fillRect(rec.getX(), rec.getY(), rec.getWidth(), rec.getHeight());
+            gc.strokeRect(rec.getX(), rec.getY(), rec.getWidth(), rec.getHeight());
+            squares.add(rec);
+            
         }else if(addMachine.isSelected()){
             addMachine.setSelected(false);
-            circles.add(new Circle());
-            //circles.get(circles.size()-1).setFill(Paint.valueOf(White));
+            if(machineName.getText().isEmpty()){
+                System.out.println("error");
+                return;
+            }
+            Circle c = new Circle();
             gc.setFill(Color.WHITE);
-            circles.get(circles.size()-1).setCenterX(e.getX()-50);
-            circles.get(circles.size()-1).setCenterY(e.getY()-50);
-            circles.get(circles.size()-1).setRadius(100);
-            gc.fillOval(circles.get(circles.size()-1).getCenterX(), circles.get(circles.size()-1).getCenterY(),
-                    circles.get(circles.size()-1).getRadius(), circles.get(circles.size()-1).getRadius());
-            gc.strokeOval(circles.get(circles.size()-1).getCenterX(), circles.get(circles.size()-1).getCenterY(),
-                    circles.get(circles.size()-1).getRadius(), circles.get(circles.size()-1).getRadius());
+            c.setCenterX(e.getX()-25);
+            c.setCenterY(e.getY()-25);
+            c.setRadius(50);
+            gc.fillOval(c.getCenterX(), c.getCenterY(), c.getRadius(), c.getRadius());
+            gc.strokeOval(c.getCenterX(), c.getCenterY(),c.getRadius(), c.getRadius());
+            circles.add(c);
         }else{
             System.out.println("no");
         }
