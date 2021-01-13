@@ -118,7 +118,7 @@ public class FrameController extends Application {
         if(addQueue.isSelected()){
             addQueue.setSelected(false);
             if(queueNUM.getText().isEmpty()){
-                System.out.println("error");
+                AlertBox.display("Enter the Queue name");
                 return;
             }
             Rectangle rec = shapes.getRectangle(e.getX(), e.getY());
@@ -130,7 +130,7 @@ public class FrameController extends Application {
         }else if(addMachine.isSelected()){
             addMachine.setSelected(false);
             if(machineName.getText().isEmpty()){
-                System.out.println("error");
+                AlertBox.display("Enter the Machine name");
                 return;
             }
             Circle c = shapes.getCircle(e.getX(), e.getY());
@@ -139,7 +139,7 @@ public class FrameController extends Application {
             gc.strokeOval(c.getCenterX(), c.getCenterY(),c.getRadius(), c.getRadius());
             controller.addCircle("M"+machineName.getText(), c);
         }else{
-            System.out.println("no");
+            AlertBox.display("Nothing is selected to be drawn");
         }
     }
     
