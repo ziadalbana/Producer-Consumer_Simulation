@@ -63,7 +63,7 @@ public class FrameController extends Application {
     static Controller controller=new Controller();
     
     @FXML
-    Button s=new Button();
+    Button clear = new Button();
     
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -151,7 +151,7 @@ public class FrameController extends Application {
     
     public static void reDraw(Iterator<Rectangle> rectangles,Hashtable<String,Circle> circles,
                               Hashtable<String,Color> colors ,Set<String> keys){
-        gc.clearRect(0, 0, 1080, 790);   
+        gc.clearRect(0, 0, 734, 812);  
         rectangles.forEachRemaining(rec ->{
             gc.setLineWidth(rec.getStrokeWidth());
             gc.setStroke(rec.getStroke());
@@ -167,5 +167,10 @@ public class FrameController extends Application {
             gc.fillOval(c.getCenterX(), c.getCenterY(), c.getRadius(), c.getRadius());
             gc.strokeOval(c.getCenterX(), c.getCenterY(),c.getRadius(), c.getRadius());
         });
-    } 
+    }
+    
+    public void clear(){
+        gc.clearRect(0, 0, 734, 812);
+        controller.clear();
+    }
 }

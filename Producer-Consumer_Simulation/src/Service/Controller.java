@@ -103,4 +103,11 @@ public class Controller {
         lines.forEach(p-> FrameController.drawLine(p));
     }
     
+    public void clear(){
+        rectangles.clear();
+        circles.clear();
+        machineColors.clear();
+        lines.clear();
+    }
+    
 }

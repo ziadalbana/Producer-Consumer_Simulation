@@ -55,6 +55,11 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
+                  <Button fx:id="clear" layoutX="178.0" layoutY="632.0" mnemonicParsing="false" onAction="#clear" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: red;" text="Clear" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
                </children>
             </VBox>
          </right>
