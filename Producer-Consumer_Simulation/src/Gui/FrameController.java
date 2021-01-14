@@ -172,5 +172,7 @@ public class FrameController extends Application {
     public void clear(){
         gc.clearRect(0, 0, 734, 812);
         controller.clear();
+        from.getItems().clear();
+        to.getItems().clear();
     }
 }

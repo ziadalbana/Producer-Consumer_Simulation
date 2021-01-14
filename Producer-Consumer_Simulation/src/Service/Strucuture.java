@@ -34,5 +34,9 @@ public class Strucuture {
             machines.get(from).setConnectedAfter(to);
         }
     }
+    public void clear(){
+        queues.clear();
+        machines.clear();
+    }
     
 }

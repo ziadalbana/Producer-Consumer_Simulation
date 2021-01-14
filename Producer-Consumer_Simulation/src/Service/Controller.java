@@ -108,6 +108,7 @@ public class Controller {
         circles.clear();
         machineColors.clear();
         lines.clear();
+        data.clear();
     }
     
 }
